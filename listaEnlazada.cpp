@@ -89,7 +89,7 @@ void buscarList(Nodo *lista){
 void borrarNodo(Nodo *&lista,int n){
 	if(lista != NULL){
 		Nodo *auxBorrar;
-		Nodo *anterior;
+		Nodo *anterior = NULL;
 		
 		auxBorrar=lista;
 		while(auxBorrar!=NULL && auxBorrar->dato!=n){
@@ -118,7 +118,7 @@ void borrarPos(Nodo *&lista,int pos){
 	int cont=0;
 	if(lista != NULL){
 		Nodo *auxBorrar;
-		Nodo *anterior;
+		Nodo *anterior = NULL;
 	
 		auxBorrar=lista;
 		while(auxBorrar!=NULL && cont!=pos){
