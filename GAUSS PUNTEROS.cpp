@@ -2,7 +2,7 @@
 
 using namespace std;
 
-int n=3;int m=4;
+int n=2;int m=4;
 
 void imprimir(double **arr) {
   for (int i = 0; i<n; i++) {
@@ -38,7 +38,6 @@ void to_one(double **arr, int x) {
 void gauss(double **arr) {
     for (int i = 0; i<(m-1); i++) {
 	   for (int j = 0; j<n; j++) {
-		  cout <<"J :"<< j <<"     I: "<< i << endl;
 		  if (i==j && *(*(arr + j) + j) != 1) {
 			 to_one(arr, j);
 			 imprimir(arr);
@@ -64,33 +63,13 @@ int main() {
     for (int i = 0; i<n; i++) {
 		  *(matriz + i) = new double[m];
     }
-    
+
+    double *variables = new double[m-1];
+
     for (int i = 0; i < n; i++) {
 	   for (int j = 0; j < m; j++) {
-		  if (i == 0) {
-			 switch (j) {
-			 case 0:*(*(matriz + i) + j) = 1; break;
-			 case 1:*(*(matriz + i) + j) = 1; break;
-			 case 2:*(*(matriz + i) + j) = 1; break;
-			 case 3:*(*(matriz + i) + j) = 6; break;
-			 }
-		  }
-		  else if (i == 1) {
-			 switch (j) {
-			 case 0:*(*(matriz + i) + j) = 2; break;
-			 case 1:*(*(matriz + i) + j) = -1; break;
-			 case 2:*(*(matriz + i) + j) = 1; break;
-			 case 3:*(*(matriz + i) + j) = 5; break;
-			 }
-		  }
-		  else if (i == 2) {
-			 switch (j) {
-			 case 0:*(*(matriz + i) + j) = 3; break;
-			 case 1:*(*(matriz + i) + j) = 1; break;
-			 case 2:*(*(matriz + i) + j) = -2; break;
-			 case 3:*(*(matriz + i) + j) = 9; break;
-			 }
-		  }
+		  cout<<"Numero["<<i<<"]["<<j<<"]: ";
+		  cin>>*(*(matriz + i) + j);
 	   }
     }
 
@@ -102,13 +81,21 @@ int main() {
 
     imprimir(matriz);
     gauss(matriz);
-    
-    if (*(*(matriz + (n-1)) + (m-1)) == 0) {
+
+    if (*(*(matriz + (n-1)) + (m-2)) == 0) {
 	   cout << "La matriz no tiene solucion" << endl;
-	   system("pause");
 	   return 0;
     }
-    
+
+    for(int i=0;i<(m-1);i++){
+        if(i==0){
+            variables[i]=*(*(matriz + (n - 1)) + (m - 1));
+            continue;
+        }
+        
+        variables[i]=*(*(matriz + (n-(i+1)))+ n);
+    }
+
     z = *(*(matriz + (n - 1)) + (m - 1));
     y = *(*(matriz + 1) + 3) - (*(*(matriz + 1) + 2) * z);
     x = *(*(matriz) + 3) - (*(*(matriz) + 2) * z ) - (*(*(matriz)+1) * y);
@@ -118,7 +105,6 @@ int main() {
     cout << "Z = " << z << endl;
 
     delete matriz;
-    system("pause");
     return 0;
 }
 
